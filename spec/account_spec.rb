@@ -5,7 +5,15 @@ describe Account do
 
   describe 'Create Account' do
     it 'creates an account with zero balance' do
-      expect(subject.balance).to eq(0)
+      expect(subject.balance).to eq 0
     end
   end
+
+  describe 'Deposit money into account' do
+    it 'allows user to deposit money' do
+      subject.deposit(1000)
+      expect(subject.balance).to eq 1000
+    end
+  end
+
 end
