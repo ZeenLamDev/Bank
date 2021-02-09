@@ -18,6 +18,7 @@ describe Account do
 
   describe 'Withdraw money from account' do
     it 'allows user to withdraw money' do
+      subject.deposit(1000)
       subject.withdraw(250)
       expect(subject.balance).to eq 750
     end
