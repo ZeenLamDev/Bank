@@ -24,4 +24,12 @@ describe Account do
     end
   end
 
+  describe 'Print statement' do
+    it 'allows user to print statement' do
+      subject.deposit(1000)
+      subject.withdraw(250)
+      expect { account.print_statement }.to output(statement).to_stdout
+    end
+  end
+
 end
