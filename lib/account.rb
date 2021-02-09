@@ -1,17 +1,34 @@
-class Account
-  attr_reader :balance
+# frozen_string_literal: true
 
-  def deposit(amount)
+require_relative 'statement'
+require 'date'
+
+class Account
+  attr_reader :balance, :transactions
+
+  def deposit(date, amount)
+    date = DateTime.strptime(date, '%d-%m-%Y')
+    date = date.strftime('%-d/%-m/%Y')
     @balance += amount
+    @transactions << ("#{date} || #{'%.2f' % amount} || || #{format('%.2f', @balance)}")
   end
 
-  def withdraw(amount)
+  def withdraw(date, amount)
+    date = DateTime.strptime(date, '%d-%m-%Y')
+    date = date.strftime('%-d/%-m/%Y')
     @balance -= amount
+    @transactions << ("#{date} || || #{'%.2f' % amount} || #{format('%.2f', @balance)}")
+  end
+
+  def print_statement
+    @statement.print(@transactions)
   end
 
   private
-  def initialize
-    @balance = 0
 
+  def initialize(statement = Statement.new)
+    @balance = 0
+    @transactions = []
+    @statement = statement
   end
 end
